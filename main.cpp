@@ -114,6 +114,26 @@ void pending() {
             if (input == "yes") {
                 cout << "Cover Letter: I am a very good fortune teller.\n";
             }
+            cout << "Do you want to email this applicant? Type 'yes' or 'no'.\n";
+            getline(cin, input);
+            while (input != "yes" && input != "no") {
+                cout << "Unrecognized command. Please try again.\n";
+                getline(cin, input);
+            }
+            if (input == "yes") {
+                cout << "An automatically generated reach-out email will be sent. Are you sure you want to do this?\n";
+                cout << "Type 'yes' or 'no'.\n";
+                getline(cin, input);
+                while (input != "yes" && input != "no") {
+                    cout << "Unrecognized command. Please try again.\n";
+                    getline(cin, input);
+                }
+                if (input == "yes") {
+                    cout << "Email sent!\n";
+                } else {
+                    cout << "Email cancelled.\n";
+                }
+            }
         } else if (input == "John") {
             cout << "Name: John Adams\n";
             cout << "Email: john.adams@gmail.com\n";
@@ -135,6 +155,26 @@ void pending() {
             }
             if (input == "yes") {
                 cout << "Cover letter: I am very good at fixing things.\n";
+            }
+            cout << "Do you want to email this applicant? Type 'yes' or 'no'.\n";
+            getline(cin, input);
+            while (input != "yes" && input != "no") {
+                cout << "Unrecognized command. Please try again.\n";
+                getline(cin, input);
+            }
+            if (input == "yes") {
+                cout << "An automatically generated reach-out email will be sent. Are you sure you want to do this?\n";
+                cout << "Type 'yes' or 'no'.\n";
+                getline(cin, input);
+                while (input != "yes" && input != "no") {
+                    cout << "Unrecognized command. Please try again.\n";
+                    getline(cin, input);
+                }
+                if (input == "yes") {
+                    cout << "Email sent!\n";
+                } else {
+                    cout << "Email cancelled.\n";
+                }
             }
         } else {
             break;
