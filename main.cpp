@@ -1,5 +1,10 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <stdio.h>
+#include <Python.h>
+#include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -55,28 +60,68 @@ void chat() {
 void search() {
     while (true) {
         cout << "Assistant Search! Search Page\n\n";
-        cout << "Please type what you want to search for. Current entries: Chie, Yosuke, Naoto, Yukari.\n";
+        cout << "Please type what you want to search for. Type a command such as 'get 5' or 'get 5 detective' in"
+                "order to search for applicants.\n";
         cout << "Type 'back' without quotes to go back to the homepage.\n";
         getline(cin, input);
-        while (input != "Chie" && input != "Yosuke" && input != "Naoto" && input != "Yukari" && input != "back") {
-            cout << "Unrecognized search. Please try again.\n";
-            getline(cin, input);
-        }
-        if (input == "Chie") {
-            cout << "Chie Satonaka\n";
-            cout << "Description: Kung-Fu Martial Artist\n";
-        } else if (input == "Yosuke") {
-            cout << "Yosuke Hanamura\n";
-            cout << "Description: Store Employee\n";
-        } else if (input == "Naoto") {
-            cout << "Naoto Shirogane\n";
-            cout << "Description: Detective\n";
-        } else if (input == "Yukari") {
-            cout << "Yukari Takeba\n";
-            cout << "Descrition: Actress\n";
-        } else if (input == "back") {
+        if (input == "back") {
             break;
         }
+        ofstream input_file;
+        //input_file.open(@"C:/Users/Nishant/Documents/CS361/cs361microservice/request.txt", std::ofstream::out);
+//        input_file.open(@"C:\\Users\\Nishant\\Documents\\CS361\\cs361microservice\\request.txt", std::ofstream::out);
+//        input_file.open("/mnt/c/Users/Nishant/Documents/CS361/cs361microservice/request.txt", std::ofstream::out);
+        input_file.open("request.txt", std::ofstream::out);
+        if (!input_file) {
+            cerr << "cringe";
+            exit(0);
+        }
+        input_file << input;
+        input_file.close();
+        char filename[] = "/mnt/c/Users/Nishant/Documents/CS361/cs361microservice/microservice.py";
+        FILE* fp;
+
+        /*
+        Py_Initialize();
+
+        fp = _Py_fopen(filename, "r");
+        PyRun_SimpleFile(fp, filename);
+        sleep(30);
+        Py_Finalize();
+
+        */
+        sleep(40);
+        vector<vector<string>> content;
+        vector<string> row;
+        string line, word;
+
+        fstream file ("output.csv", ios::in);
+        if(file.is_open())
+        {
+            while(getline(file, line))
+            {
+                row.clear();
+
+                stringstream str(line);
+
+                while(getline(str, word, ','))
+                    row.push_back(word);
+                content.push_back(row);
+            }
+        }
+        else
+            cout<<"Could not open the file\n";
+
+        for(int i=0;i<content.size();i++)
+        {
+            for(int j=0;j<content[i].size();j++)
+            {
+                cout<<content[i][j]<<" ";
+            }
+            cout<<"\n";
+        }
+        
+
     }
     homescreen();
 }
